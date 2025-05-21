@@ -77,13 +77,13 @@ class Ordinary_Car:
 if __name__=='__main__':
     PWM = Ordinary_Car()          
     try:
-        PWM.set_motor_model(2000,2000,2000,2000)       #Forward
+        PWM.set_motor_model(1000,1000,1000,1000)       #Forward
         time.sleep(1)
-        PWM.set_motor_model(-2000,-2000,-2000,-2000)   #Back
+        PWM.set_motor_model(-1000,-1000,-1000,-1000)   #Back
         time.sleep(1)
-        PWM.set_motor_model(-2000,-2000,2000,2000)     #Left 
+        PWM.set_motor_model(-1000,-1000,1000,1000)     #Left 
         time.sleep(1)
-        PWM.set_motor_model(2000,2000,-2000,-2000)     #Right    
+        PWM.set_motor_model(1000,1000,-1000,-1000)     #Right    
         time.sleep(1)
         PWM.set_motor_model(0,0,0,0)                   #Stop
     except KeyboardInterrupt:  # When 'Ctrl+C' is pressed, the child program destroy() will be  executed.

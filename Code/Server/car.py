@@ -45,26 +45,26 @@ class Car:
 
     def run_motor_ultrasonic(self, distance):
         if (distance[0] < 30 and distance[1] < 30 and distance[2] <30) or distance[1] < 30 :
-            self.motor.set_motor_model(-1450,-1450,-1450,-1450) 
+            self.motor.set_motor_model(-725,-725,-725,-725) 
             time.sleep(0.1)   
             if distance[0] < distance[2]:
-                self.motor.set_motor_model(1450,1450,-1450,-1450)
+                self.motor.set_motor_model(725,725,-725,-725)
             else :
-                self.motor.set_motor_model(-1450,-1450,1450,1450)
+                self.motor.set_motor_model(-725,-725,725,725)
         elif distance[0] < 30 and distance[1] < 30:
-            self.motor.set_motor_model(1500,1500,-1500,-1500)
+            self.motor.set_motor_model(750,750,-750,-750)
         elif distance[2] < 30 and distance[1] < 30:
-            self.motor.set_motor_model(-1500,-1500,1500,1500)
+            self.motor.set_motor_model(-750,-750,750,750)
         elif distance[0] < 20 :
-            self.motor.set_motor_model(2000,2000,-500,-500)
+            self.motor.set_motor_model(1000,1000,-250,-250)
             if distance[0] < 10 :
-                self.motor.set_motor_model(1500,1500,-1000,-1000)
+                self.motor.set_motor_model(750,750,-500,-500)
         elif distance[2] < 20 :
-            self.motor.set_motor_model(-500,-500,2000,2000)
+            self.motor.set_motor_model(-250,-250,1000,1000)
             if distance[2] < 10 :
-                self.motor.set_motor_model(-1500,-1500,1500,1500)
+                self.motor.set_motor_model(-750,-750,750,750)
         else :
-            self.motor.set_motor_model(600,600,600,600)
+            self.motor.set_motor_model(300,300,300,300)
 
     def mode_ultrasonic(self):
         if (time.time() - self.car_record_time) > 0.2:
@@ -93,15 +93,15 @@ class Car:
             infrared_value = self.infrared.read_all_infrared()
             #print("infrared_value: " + str(infrared_value))
             if infrared_value == 2:
-                self.motor.set_motor_model(800,800,800,800)
+                self.motor.set_motor_model(400,400,400,400)
             elif infrared_value == 4:
-                self.motor.set_motor_model(-1500,-1500,2500,2500)
+                self.motor.set_motor_model(-750,-750,1250,1250)
             elif infrared_value == 6:
-                self.motor.set_motor_model(-2000,-2000,4000,4000)
+                self.motor.set_motor_model(-1000,-1000,2000,2000)
             elif infrared_value == 1:
-                self.motor.set_motor_model(2500,2500,-1500,-1500)
+                self.motor.set_motor_model(1250,1250,-750,-750)
             elif infrared_value == 3:
-                self.motor.set_motor_model(4000,4000,-2000,-2000)
+                self.motor.set_motor_model(2000,2000,-1000,-1000)
             elif infrared_value == 7:
                 self.motor.set_motor_model(0,0,0,0)
 
@@ -113,14 +113,14 @@ class Car:
             R = self.adc.read_adc(1)
             #print("L: {}, R: {}".format(L, R))
             if L < 2.99 and R < 2.99 :
-                self.motor.set_motor_model(600,600,600,600)
+                self.motor.set_motor_model(300,300,300,300)
             elif abs(L-R)<0.15:
                 self.motor.set_motor_model(0,0,0,0)
             elif L > 3 or R > 3:
                 if L > R :
-                    self.motor.set_motor_model(-1200,-1200,1400,1400)
+                    self.motor.set_motor_model(-600,-600,700,700)
                 elif R > L :
-                    self.motor.set_motor_model(1400,1400,-1200,-1200)
+                    self.motor.set_motor_model(700,700,-600,-600)
 
     def mode_rotate(self, n):
         angle = n
@@ -134,7 +134,7 @@ class Car:
             BL = VY - VX - W
             BR = VY + VX + W
             print("rotating")
-            self.motor.set_motor_model(FL, BL, FR, BR)
+            self.motor.set_motor_model(FL // 2, BL // 2, FR // 2, BR // 2)
             time.sleep(5*self.time_compensate*bat_compensate/1000)
             angle -= 5
 
